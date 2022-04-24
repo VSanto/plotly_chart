@@ -4,8 +4,7 @@ function buildCharts(sample) {
   d3.json("samples.json").then((data) => {
     console.log(data);
 
-    // Create a variable that holds the samples array. 
-    
+    // Create a variable that holds the samples array.
 
     // Create a variable that filters the samples for the object with the desired sample number.
 
