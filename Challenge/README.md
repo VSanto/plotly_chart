@@ -1,4 +1,4 @@
-# week12_code
+# Plotlydiploy
 # Create Horizontal Bar Chart
 # Create Bubble Chart
 # Create Gauge Chart
