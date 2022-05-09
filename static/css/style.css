@@ -1,16 +1,16 @@
 body {
-    color:beige
-    background-color: aqua;
+    color: #000000;
 }
 
-    .tag {
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        font-size: 1rem;
-    }
+.jumbotron {
+    background-image: url("../images/BellyButton.jpg")
+    background-size: 100% 100%;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px #000000;
 
-    .jumbotron {
-        background-image: url(../images/banner.jpg)
-        baground-size: 100% 100%;
-        text-align: center;
-    }
-    
+}
+
+.lorem-ipsum {
+    font-family: "Lucida Handwriting", cursive, serif;
+}
