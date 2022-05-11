@@ -1,9 +1,10 @@
+
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
 
   // Use the list of sample names to populate the select options
-  d3.json("js/static/samples.json").then((data) => {
+  d3.json("samples.json").then((data) => {
     var sampleNames = data.names;
 
     sampleNames.forEach((sample) => {
@@ -32,7 +33,7 @@ function optionChanged(newSample) {
 
 // Demographics Panel 
 function buildMetadata(sample) {
-  d3.json("js/static/samples.json").then((data) => {
+  d3.json("samples.json").then((data) => {
     var metadata = data.metadata;
     // Filter the data for the object with the desired sample number
     var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
@@ -57,7 +58,8 @@ function buildMetadata(sample) {
 // 1. Create the buildCharts function.
 function buildCharts(sample) {
   // 2. Use d3.json to load and retrieve the samples.json file 
-  d3.json("js/static/samples.json").then((data) => {
+  d3.json("samples.json").then((data) => {
+    console.log(data);
     // 3. Create a variable that holds the samples array. 
     var samples = data.samples;
 
@@ -68,16 +70,16 @@ function buildCharts(sample) {
     var result = sampleArray[0];
 
     // 6. Create variables that hold the otu_ids, otu_labels, and sample_values.
-    var otu_ids = result["otu_ids"];
-    var labels = result["otu_labels"];
-    var sample_values = result["sample_value"];
+    var otu_ids = result.otu_ids;
+    var labels = result.otu_labels;
+    var sample_values = result.sample_values;
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order  
     //  so the otu_ids with the most bacteria are last. 
     var yticks = otu_ids.slice(0, 10).reverse().map(val => `OTU ${val}`);
-    var xticks = sample_values.slice(0, 10).reverse();
-    var labels = out_labels.slice(0, 10).reverse();
+    // var xticks = sample_values.slice(0, 10).reverse();
+    // var labels = otu_labels.slice(0, 10).reverse();
 
     // var yticks = resultSampleValues.slice(0,10).reverse
     // var ylabels = resultOTUIDs.slice(0,10).reverse().map(entry => 'OTU ${entry.toString()}');
@@ -88,9 +90,9 @@ function buildCharts(sample) {
     // 8. Create the trace for the bar chart. 
     var barData = [
       {
-        x: xticks,
+        x: sample_values.slice(0, 10).reverse(),
         y: yticks,
-        text: labels,
+        text: labels.slice(0, 10).reverse(),
         type: "bar",
         orientation: "h"
       }
@@ -107,16 +109,16 @@ function buildCharts(sample) {
     // 1. Create the trace for the bubble chart.
     var bubbleData = [
       {
-      x: otu_ids,
-      y: sample_values,
-      text: otu_labels,
-      mode: "markers",
-      marker: {
-        size: sample_values,
-        color: otu_ids,
-        colorscale: "Earth",
-      },
-    }
+        x: otu_ids,
+        y: sample_values,
+        text: labels,
+        mode: "markers",
+        marker: {
+          size: sample_values,
+          color: otu_ids,
+          colorscale: "Earth",
+        },
+      }
 
     ];
 
@@ -137,39 +139,35 @@ function buildCharts(sample) {
     // Create a variable that filters the metadata array for the oject with the desired sample number
     var metadata = data.metadata;
 
-    var metadataArray = metadata.filter(metadataObj => metadataObj.id == sample);
+    var metadataArray = metadata.filter(sampleObj => sampleObj.id == sample);
 
     resultMetadata = metadataArray[0];
 
-    var otu_ids = resultMetadata["otu_ids"];
-    var labels = resultMetadata["otu_labels"];
-    var sample_values = resultMetadata["sample_value"];
-
     // Create a variable that holds the washing frequency
-    var wfreq = resultMetadata["wfreg"];
+    var wfreq = parseFloat(resultMetadata.wfreq);
 
     // 4. Create the trace for the gauge chart.
     var gaugeData = [
-    {
-      value: wfreq,
-      title: { text: "Scrubs per Week" },
-      type: "indicator",
-      mode: "gauge+number",
-      gauge: {
-        axis: { range: [null, 10], tickwidth: 1, tickmode: "array", tickvals: [0, 2, 4, 6, 8, 10] },
-        bar: { color: "black" },
-        steps: [
-          { range: [0, 2], color: "red" },
-          { range: [2, 4], color: "orange" },
-          { range: [4, 6], color: "yellow" },
-          { range: [6, 8], color: "green" },
-          { range: [8, 10], color: "darkgreen" },
-        ]
+      {
+        value: wfreq,
+        title: { text: "Scrubs per Week" },
+        type: "indicator",
+        mode: "gauge+number",
+        gauge: {
+          axis: { range: [null, 10], tickwidth: 1, tickmode: "array", tickvals: [0, 2, 4, 6, 8, 10] },
+          bar: { color: "black" },
+          steps: [
+            { range: [0, 2], color: "red" },
+            { range: [2, 4], color: "orange" },
+            { range: [4, 6], color: "yellow" },
+            { range: [6, 8], color: "green" },
+            { range: [8, 10], color: "darkgreen" },
+          ]
+        }
       }
-    }
-  ];
+    ];
 
-  // 5. Create the layout for the gauge chart.
+    // 5. Create the layout for the gauge chart.
     var gaugeLayout = {
       title: "Belly Button Washing Frequency",
       bar: { color: "black" }
