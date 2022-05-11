@@ -1,54 +1,27 @@
-# Plotlydiploy
-# Create Horizontal Bar Chart
-# Create Bubble Chart
-# Create Gauge Chart
-# Customize Dashboard
-# Download Starter Files
-# *Module 12 Challenge - 
-// Create the buildChart function.
-function buildCharts(sample) {
-  // Use d3.json to load the samples.json file 
-  d3.json("samples.json").then((data) => {
-    console.log(data);
-
-    // Create a variable that holds the samples array. 
+The purpose of this challenge was to: 
 
 
-    // Create a variable that filters the samples for the object with the desired sample number.
+ ### Create a Horizontal Bar Chart
+ 
 
-    // 1. Create a variable that filters the metadata array for the object with the desired sample number.
-
-    // Create a variable that holds the first sample in the array.
+![Horizontal Bar Chart](https://user-images.githubusercontent.com/92495807/167752518-8eda2a50-dffa-4678-838a-7cc0f678291e.PNG)
   
+  
+### Create a Bubble Chart
 
-    // 2. Create a variable that holds the first sample in the metadata array.
-    
-
-    // Create variables that hold the otu_ids, otu_labels, and sample_values.
+  
+![Bubble_Chart](https://user-images.githubusercontent.com/92495807/167753553-9e9cc6d3-7d4b-4f57-a27c-628f337d6fde.PNG)
 
 
-    // 3. Create a variable that holds the washing frequency.
-   
-    // Create the yticks for the bar chart.
+ ### Create a Gauge Chart
+ 
+![Gauge](https://user-images.githubusercontent.com/92495807/167752924-56eac7d6-524d-4588-95a5-70af1955ebb4.PNG)
 
-    // Use Plotly to plot the bar data and layout.
-    Plotly.newPlot();
-    
-    // Use Plotly to plot the bubble data and layout.
-    Plotly.newPlot();
-   
-    
-    // 4. Create the trace for the gauge chart.
-    var gaugeData = [
-     
-    ];
-    
-    // 5. Create the layout for the gauge chart.
-    var gaugeLayout = { 
-     
-    };
+ ## Customize the Dashboard
+ 
+![Belly_Button_Biodiversity_Dashboard](https://user-images.githubusercontent.com/92495807/167752988-71492947-85dd-424b-8537-c5e71aa39733.PNG)
 
-    // 6. Use Plotly to plot the gauge data and layout.
-    Plotly.newPlot();
-  });
-}
+http://127.0.0.1:5500/index.html
+
+### In Conclusion
+This challenge was difficult for me.  I had tons of error.  Somehow, I changed the index, had to go back to the module to download the index code again.  The biggest obstacle I had was getting the charts to load.  My tutor helped me out.  Having the files in the static folder seemed to be the issue.  Moving the charts.js and samples.json files out of the static folder worked.  The webpage loaded.  I am getting better at understanding the errors.  Really need to work on my spelling.  All in all this was a fun challenge.
